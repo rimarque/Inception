@@ -21,6 +21,28 @@ RUN     service php7.4-fpm stop
 COPY	conf/www.conf ${PHPPATH}/pool.d/
 
 #Change some values in the php config files
+
+#First command edits the php.ini file, disables cgi.fix_pathinfo.
+#It finds the line ;cgi.fix_pathinfo=1 (which is commented out) and replaces it with cgi.fix_pathinfo=0 (uncommented and set to 0).
+#Setting cgi.fix_pathinfo to 0 is a security measure to prevent PHP from interpreting paths as scripts, which can mitigate certain types of attacks.
+
+#Second command edits the www.conf file in the pool.d directory,  changes PHP-FPM listen address.
+#It changes the listen directive from a Unix socket file (/run/php/php$PHP_VERSION_ENV-fpm.sock) to a TCP port (9000).
+#$PHP_VERSION_ENV is an environment variable representing the PHP version.
+
+#Thirth command also edits the www.conf file, sets listen mode.
+#It uncomment the listen.mode = 0660 directive, which sets the permissions for the socket file. 
+#0660 means that the owner and group have read and write permissions, but others have no permissions.
+
+#This command edits the www.conf file, disables daemonization.
+#It uncomment the daemonize = yes directive and changes it to daemonize = no.
+#Setting daemonize to no means that PHP-FPM will not run as a background process. 
+#This is useful when running PHP-FPM in a container or under a process manager.
+
+RUN		sed -i 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' ${PHPPATH}/php.ini && \
+		sed -i "s/listen = \/run\/php\/php$PHP_VERSION_ENV-fpm.sock/listen = 9000/g" ${PHPPATH}/pool.d/www.conf && \
+		sed -i 's/;listen.mode = 0660/listen.mode = 0660/g' ${PHPPATH}/pool.d/www.conf && \
+		sed -i 's/;daemonize = yes/daemonize = no/g' ${PHPPATH}/pool.d/www.conf
 RUN		sed -i 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' ${PHPPATH}/php.ini && \
 		sed -i "s/listen = \/run\/php\/php$PHP_VERSION_ENV-fpm.sock/listen = 9000/g" ${PHPPATH}/pool.d/www.conf && \
 		sed -i 's/;listen.mode = 0660/listen.mode = 0660/g' ${PHPPATH}/pool.d/www.conf && \
