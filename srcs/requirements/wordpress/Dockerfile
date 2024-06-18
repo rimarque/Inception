@@ -27,7 +27,7 @@ RUN		sed -i 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' ${PHPPATH}/php.ini && \
 		sed -i 's/;daemonize = yes/daemonize = no/g' ${PHPPATH}/pool.d/www.conf
 
 #Download the wordpress CLI, change its permissions and move it to the bin/wp folder.       
-RUN	    wget --no-check-certificate https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
+RUN	wget --no-check-certificate https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
         chmod +x wp-cli.phar && \
         mv wp-cli.phar /usr/local/bin/wp
 
@@ -46,4 +46,3 @@ COPY    ./tools/setup.sh /bin/
 RUN     chmod -x /bin/setup.sh
 
 CMD		["bash", "/bin/setup.sh", "php-fpm7.4", "--nodaemonize"]
-
