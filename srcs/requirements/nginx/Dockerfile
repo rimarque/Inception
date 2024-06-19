@@ -6,7 +6,8 @@ RUN     apt update && \
         apt install --no-install-recommends --no-install-suggests -y \
         nginx \
         openssl \
-        && rm -rf /var/lib/apt/lists/*
+        && rm -rf /var/lib/apt/lists/ \
+		&& apt-get clean
 
 #Define the ARG to use in the next commands. 
 #At the final version, we'll have a .env file with all the variables,

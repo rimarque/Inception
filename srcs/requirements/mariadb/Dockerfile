@@ -19,7 +19,8 @@ EXPOSE 3306
 #executes on the container
 RUN		apt-get update \
 		&& apt-get install -y --no-install-recommends --no-install-suggests mariadb-server \
-		&& rm -rf /var/lib/apt/lists/*
+		&& rm -rf /var/lib/apt/lists/* \
+		&& apt-get clean
 
 #executes on the host (copys from the host (first argument) to the container (secund argument))
 COPY 	./conf/50-server.cnf /etc/mysql/mariadb.conf.d/

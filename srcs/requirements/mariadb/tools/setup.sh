@@ -4,7 +4,7 @@
 # at the end, exec $@ run the next CMD in the Dockerfile.
 # In this case: "mysqld_safe" that restart the mariadb service
 
-#These variables will be moved to .env
+#These variables will be moved to .env and changed
 DB_NAME=thedatabase
 DB_USER=theuser
 DB_PASSWORD=abc
