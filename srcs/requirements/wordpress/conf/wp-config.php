@@ -1,4 +1,8 @@
 <?php
+
+//One of the most important files in your WordPress installation is the wp-config.php file. 
+//This file is located in the root of your WordPress file directory and contains 
+//your website’s base configuration details, such as database connection information.
 /**
  * The base configuration for WordPress
  *
@@ -20,22 +24,13 @@
 
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', getenv('thedatabase') );
-define( 'DB_USER', getenv('theuser') );
-define( 'DB_PASSWORD', getenv('abc') );
-define( 'DB_HOST', getenv('mariadb') );
-define( 'WP_HOME', getenv('https://login.42.fr') );
-define( 'WP_SITEURL', getenv('https://login.42.fr') );
 
-//Final output do Walter
-/* define( 'DB_NAME', getenv('DB_NAME') );
-define( 'DB_USER', getenv('DB_USER') );
-define( 'DB_PASSWORD', getenv('DB_PASSWORD') );
+define( 'DB_NAME', getenv('DB_NAME') );
+define( 'DB_USER', getenv('DB_ADMIN_USER') );
+define( 'DB_PASSWORD', getenv('DB_ADMIN_PASSWORD') );
 define( 'DB_HOST', getenv('DB_HOST') );
-define( 'WP_HOME', getenv('WP_FULL_URL') );
-define( 'WP_SITEURL', getenv('WP_FULL_URL') );
 define( 'DB_CHARSET', 'utf8' );
-define( 'DB_COLLATE', '' ); */
+define( 'DB_COLLATE', '' );
 
 /**#@+
  * Authentication unique keys and salts.

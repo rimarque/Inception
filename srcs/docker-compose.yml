@@ -1,0 +1,54 @@
+version: '3'
+services:
+    mariadb:
+      container_name: mdb_cont
+      build:
+        context: ./requirements/mariadb
+        dockerfile: Dockerfile
+      image: mariadb:latest
+      env_file:
+        - ./.env
+      init: true
+      restart: on-failure
+      #volumes:
+      #  - mariadb_data:/var/lib/mysql
+      ports:
+        - "3306:3306"
+      networks:
+        - Inception
+    wordpress:
+      container_name: wp_cont
+      build:
+        context: ./requirements/wordpress
+        dockerfile: Dockerfile
+      image: wordpress:latest
+      depends_on:
+        - mariadb
+      restart: on-failure
+      ports:
+        - "9000:9000" # Map port 9000 on host to port 9000 in container
+      networks:
+      - Inception
+    nginx:
+      container_name: ngx_cont
+      build:
+        context: ./requirements/nginx
+        dockerfile: Dockerfile
+      # Specify the image name for NGINX
+      image: nginx:latest
+      depends_on:
+       - wordpress
+      restart: on-failure
+      ports:
+        - "443:443"  # HTTPS port for NGINX
+      networks:
+        - Inception
+
+#volumes:
+#  mariadb_data:
+
+networks:
+  Inception:
+    driver: bridge
+
+#`docker-compose up --build
