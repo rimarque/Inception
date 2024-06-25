@@ -10,8 +10,8 @@ services:
         - ./.env
       init: true
       restart: on-failure
-      #volumes:
-      #  - mariadb_data:/var/lib/mysql
+      volumes:
+        - database:/var/lib/mysql
       ports:
         - "3306:3306"
       networks:
@@ -22,11 +22,15 @@ services:
         context: ./requirements/wordpress
         dockerfile: Dockerfile
       image: wordpress:latest
+      env_file:
+        - ./.env
       depends_on:
         - mariadb
       restart: on-failure
       ports:
         - "9000:9000" # Map port 9000 on host to port 9000 in container
+      volumes:
+        - wordpress_files:/var/www/inception/
       networks:
       - Inception
     nginx:
@@ -36,11 +40,15 @@ services:
         dockerfile: Dockerfile
       # Specify the image name for NGINX
       image: nginx:latest
+      env_file:
+        - ./.env
       depends_on:
        - wordpress
       restart: on-failure
       ports:
         - "443:443"  # HTTPS port for NGINX
+      volumes:
+        - wordpress_files:/var/www/inception/
       networks:
         - Inception
 
@@ -50,5 +58,21 @@ services:
 networks:
   Inception:
     driver: bridge
+
+volumes:
+
+  database:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ~/data/database
+
+  wordpress_files:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ~/data/wordpress_files
 
 #`docker-compose up --build
