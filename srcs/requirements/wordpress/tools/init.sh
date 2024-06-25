@@ -47,7 +47,7 @@ if ! wp --allow-root --path="/var/www/inception/" core is-installed ; then
         --admin_email=$WP_ADMIN_EMAIL
 fi;
 
-#If user does does not exist, create user
+#If user does not exist, create user
 if ! wp --allow-root --path="/var/www/inception/" user get $WP_USER ; then
     wp  --allow-root --path="/var/www/inception/" user create \
         $WP_USER \

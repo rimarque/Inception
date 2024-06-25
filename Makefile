@@ -23,7 +23,7 @@ start:
 	docker compose -p $(NAME) start
 
 stop:
-	docker compose -p $(NAME) $(COMPOSE) stop
+	docker compose -p $(NAME) -f $(COMPOSE) stop
 
 rm-image:
 	docker rmi -f $$(docker images -q)
