@@ -52,8 +52,8 @@ if ! wp --allow-root --path="/var/www/inception/" user get $WP_USER ; then
     wp  --allow-root --path="/var/www/inception/" user create \
         $WP_USER \
         $WP_EMAIL \
-        --user_pass=$WP_PASSWORD \
-        --role=$WP_ROLE
+        --role=$WP_ROLE \
+        --user_pass=$WP_PASSWORD
 fi;
 
 # Execute the command passed to the script
