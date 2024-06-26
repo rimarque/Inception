@@ -1,11 +1,9 @@
 NAME = inception
 COMPOSE = ./srcs/docker-compose.yml
-DATA_PATH ?= ~/data
+DATA_PATH ?= ~/data/rimarque
 
 
 all: dir up 
-
-
 
 # Create necessary directories for MariaDB and WordPress data
 dir:

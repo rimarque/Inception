@@ -1,4 +1,10 @@
-# This configuration snippet is a MySQL/MariaDB configuration file that defines various settings and parameters for the MariaDB server.
+#Even though default configuration files are generated during installation, 
+#custom conf files give you customization, control, consistency and automation
+#When using Docker and Docker Compose, having configuration files ensures 
+#that your services are automatically configured correctly when containers are started, 
+#which is essential for reliable and repeatable deployments.
+
+# This is a MySQL/MariaDB configuration file that defines various settings and parameters for the MariaDB server.
 
 # These groups are read by MariaDB server.
 # Use it for options that only the server (but not clients) should see

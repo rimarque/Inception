@@ -55,6 +55,9 @@ define( 'DB_COLLATE', '' );
  *
  * @since 2.6.0
  */
+
+//These keys and salts improve the security of the cookies and password storage mechanisms in WordPress, 
+//making it more difficult for potential attackers to gain unauthorized access to your website.
 define('AUTH_KEY',         'x6~oEHrqJQ]nD4BjTO(wfd6 @%<1pvFlL);!~yGGrbVA.C|R*.9LL%+>2?m+#`*l');
 define('SECURE_AUTH_KEY',  'F[.=RcktW(T(-bz4a0r]W4_3D1UM<6~bfs |5dBz-^>_jLH!!`pNq29a8b7E&d3V');
 define('LOGGED_IN_KEY',    '<{?hO-Hta|p|8!q.J{LQzIHb3!g-Eg)r#`9|+9}>%xV1LnG7AG^zLNG[g>lr17ne');
@@ -90,7 +93,6 @@ $table_prefix = 'wp_';
 define( 'WP_DEBUG', false );
 
 /* Add any custom values between this line and the "stop editing" line. */
-
 
 
 /* That's all, stop editing! Happy publishing. */
