@@ -22,14 +22,26 @@
  * @package WordPress
  */
 
-// ** Database settings - You can get this info from your web host ** //
-/** The name of the database for WordPress */
+// ** Database settings ** //
 
+//These lines tell you where to find your database content wich is responsible for loading your pages and posting content
+//WordPress will connect to this database to store and retrieve all its data, including posts, pages, user information, settings, and more
+
+//Identifies which database to use
 define( 'DB_NAME', getenv('DB_NAME') );
+//Specifies the user with access to the database
+//The database user must have the appropriate permissions to access the specified database. T
+//This user should have sufficient privileges to read from and write to the database, create and modify tables, etc. -> this is done in the mariadb script
 define( 'DB_USER', getenv('DB_USER') );
+//Authenticates the database user
 define( 'DB_PASSWORD', getenv('DB_PASSWORD') );
+//Locates the database server (mariadb is defined as a server in the docker compose file)
 define( 'DB_HOST', getenv('DB_HOST') );
+//Defines the character set to be used: UTF-8 character encoding
+//UTF-8 is a widely used encoding that can represent almost all characters in the Unicode character set, making it suitable for multilingual content.
 define( 'DB_CHARSET', 'utf8' );
+//Defines the collation for the database tables. Collation is a set of rules for comparing and sorting characters in the database.
+//The empty string means that the we will use the default collation for UTF-8
 define( 'DB_COLLATE', '' );
 
 /**#@+
@@ -43,14 +55,14 @@ define( 'DB_COLLATE', '' );
  *
  * @since 2.6.0
  */
-define('AUTH_KEY',         'nynZN@p%~s+VI2R}}wUJ[QIeCFk-DkNI)A:h=badn/,4xBpfAt,y(#,N}hnGAk [');
-define('SECURE_AUTH_KEY',  '5}`z5X=]VN(~tp&pMG(~cwLoxIC`cnRqAP5Yf|f%^aN9-H+1O!|feL}slY#laZF9');
-define('LOGGED_IN_KEY',    '_CI;<.-Yb#q6/C)w5BO*Qw!+rrp}umu+0bg|E,p<zdg T#E.|.<{|(BDczhL<#v(');
-define('NONCE_KEY',        'M3eR`S~+F[Ie%NyZ$0x}(8:+FEp{cI?}J>J-j)cXU_Vno#,ylXd3|y`;#,fNlzX5');
-define('AUTH_SALT',        'F)vM!awJo~0[A :hBe^Er1fv6uE0|*N*c+5>CYGRv` )E+@sk(&j?~@MX/d>!Tz~');
-define('SECURE_AUTH_SALT', 'VK8-jb3.JA$|8]m&0TSoG#4nQ>+e1kB}A&ZYPzzJ.Ol#3  |tJlN.,IlL}.TAX5#');
-define('LOGGED_IN_SALT',   'HcgLD)(7|e]E@1nh(|i~*dK+Pj*#T;rc+SR1*+{C%gQAD7is>xHT6*6O]b(J;G#m');
-define('NONCE_SALT',       '=5RgOJnbZn:z7C&bv-x:O]$6cnkv.SRz!2Us F~Uvn:$PuKo8he`Wh,r!-p3x`h1');
+define('AUTH_KEY',         'x6~oEHrqJQ]nD4BjTO(wfd6 @%<1pvFlL);!~yGGrbVA.C|R*.9LL%+>2?m+#`*l');
+define('SECURE_AUTH_KEY',  'F[.=RcktW(T(-bz4a0r]W4_3D1UM<6~bfs |5dBz-^>_jLH!!`pNq29a8b7E&d3V');
+define('LOGGED_IN_KEY',    '<{?hO-Hta|p|8!q.J{LQzIHb3!g-Eg)r#`9|+9}>%xV1LnG7AG^zLNG[g>lr17ne');
+define('NONCE_KEY',        'wiWR{3niENsnkR`p%WjKpJ.T+,%B|pJpHflPY3^(fe/)q49|x=OXK*f`$S!nLGmu');
+define('AUTH_SALT',        'rdI-AY$ifI#*>-!X_vTsX#)N[$:qovX]vISRu=Z|-r|:oTSr+b-2cEF{Z0:~[^DL');
+define('SECURE_AUTH_SALT', 'bHWDac:a];LY~YNMJt`q`nJSeSfkI(uV:f<K^LsIzu+TN0Vavnj6HVr6n 49A-J+');
+define('LOGGED_IN_SALT',   'z9S0XnP b&Z3KunNupG)3.U^[1d&|*+!_-bI->EI[vhQ]z5a8o?:[6IP}j+1s&~;');
+define('NONCE_SALT',       '[v[)qOK(!1r3aOCK>cG?8+|FCRdXNzS=(I!-Q}Y_X9d!<xbuEh,m0&KtQmfO&E8>');
 
 
 /**#@-*/
