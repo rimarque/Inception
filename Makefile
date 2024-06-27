@@ -3,10 +3,9 @@ COMPOSE = ./srcs/docker-compose.yml
 DATA_PATH ?= ~/data/rimarque
 
 
-all: dir up 
+all: vol up 
 
-# Create necessary directories for MariaDB and WordPress data
-dir:
+vol:
 	sudo mkdir -p $(DATA_PATH)
 	sudo mkdir -p $(DATA_PATH)/database
 	sudo mkdir -p $(DATA_PATH)/wordpress_files
@@ -32,4 +31,4 @@ fclean: clean
 	@sudo rm -rf ~/data
 	@docker system prune -a
 
-re: fclean dir up
+re: fclean vol up

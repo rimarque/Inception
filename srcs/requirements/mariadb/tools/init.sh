@@ -7,9 +7,6 @@
 # can read env variables and use them to configure the service, allowing the same container image to be used in multiple environments with different configurations
 # this script integrates with the container's CMD instruction to run the main application process after the initialization steps are completed, ensuring that the application starts in a properly configured state
 
-# this line, if uncommented, enables the debug mode, making the script print each command executing it and exit if any of it returns a non-zero status
-# set -ex # print commands & exit on error (debug mode)
-
 # this script runs in the building container
 # it starts the mariadb service and creates the database and users according to the .env file
 # at the end, exec $@ runs the next CMD in the Dockerfile.
@@ -23,15 +20,10 @@ service mariadb start
 sleep 5
 
 #Create the database and the users with its passwords and permissions.
-#starts the mariadb command-line client (-u root specifies the user as root. 
-#-v is for verbose outpus - prints more info).
-#The mariadb client will execute all commands enclosed between << EOF and EOF
+#Starts the mariadb command-line client (-u root specifies the user as root, -v is for verbose outpus - prints more info).
+#The mariadb client will execute all commands enclosed between << EOF and EOF 
 
 # Grating all privileges to on DB_NAME to DB_USER is necessary for the WordPress application to be able to read from and write to the database.
-
-# Allowing the root user to perform essential data manipulation tasks, 
-# ensures that administrative tasks requiring direct database access from the server itself can be performed securely and effectively
-# and restricting root access to localhost enhances security.
 
 # After making changes to the user privileges, it's good practice to flush the privileges to ensure they take effect immediately.
 
@@ -39,10 +31,8 @@ mariadb -v -u root << EOF
 CREATE DATABASE IF NOT EXISTS $DB_NAME;
 CREATE USER IF NOT EXISTS '$DB_USER'@'%' IDENTIFIED BY '$DB_PASSWORD';
 GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'%' IDENTIFIED BY '$DB_PASSWORD';
-GRANT SELECT, INSERT, UPDATE, DELETE ON $DB_NAME.* TO 'root'@'localhost' IDENTIFIED BY '$DB_PASS_ROOT'
 FLUSH PRIVILEGES;
 EOF
-
 
 # pauses execution of the script, so that it allows time for the DB operations initialized by the mariadb client to complete before stopping the service
 sleep 5

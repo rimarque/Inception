@@ -1,25 +1,22 @@
 # Dockerfile responsible to build the image for the mariadb container
 
-# speficies the base image for the Docker image - Debian with the Bullseye release (which is the one previous to the latest stable version)
-# it sets up the starting point for building the Docker image (Debian 11)
+# speficies the base image for the Docker image - https://www.debian.org/releases/ - the version before da lastest one as per specified in the subject
 # base image is needed because it provides the foundational environment upon which the custom Docker image will be built - OS, software packages, libraries and tools; docker images are built in layers and the base image is the initial layer
 FROM debian:bullseye
 
-#Indicates that this container will be listening on port 3306, as per mandated in the subject and
-#because it's the convention for MySQL database (MariaDB is an open-source relational database management system (RDBMS) that is a fork of MySQL)
-# the word EXPOSE doesn't publish the port, it only indicates which ports are intended to be published
-# allows services running inside the container to be accessible outside of it; informs docker compose about the ports that need to be connected between containers
+# Indicates that this container will be listening on port 3306, as per mandated in the subject and
+# because it's the convention for MySQL database (MariaDB is an open-source relational database management system (RDBMS) that is a fork of MySQL)
+# the word EXPOSE doesn't publish the port, it only indicates which ports are intended to be published (that is done in docker compose, allowing external clients to access the services running inside the container)
+# informs docker compose about the ports that need to be connected between containers
 EXPOSE 3306
 
 # Runs shell commands inside the Docker image
 #Update the system and install the mariadb-server only. 
-#The --no-install-recommends and --no-install-suggests flags are 
-#used to avoid installing unnecessary packages. I used the the 
-#commands with && to avoid creating unnecessary layers. 
+#I used the the commands with && to avoid creating unnecessary layers. 
 #The rm -rf /var/lib/apt/lists/* is used to clean the apt cache and avoid unnecessary files in the image.
 #executes on the container
 RUN		apt-get update \
-		&& apt-get install -y --no-install-recommends --no-install-suggests mariadb-server \
+		&& apt-get install -y mariadb-server \
 		&& rm -rf /var/lib/apt/lists/* \
 		&& apt-get clean
 
@@ -31,7 +28,7 @@ RUN mkdir -p /var/run/mysqld && \
 	chown -R mysql:mysql /var/run/mysqld && \
 	chown -R mysql:mysql /var/lib/mysql
 
-#executes on the host (copys from the host (first argument) to the docker image (secund argument))
+# executes on the host (copys from the host (first argument) to the docker image (second argument))
 COPY 	./conf/50-server.cnf /etc/mysql/mariadb.conf.d/
 COPY	./tools/init.sh /bin/
 

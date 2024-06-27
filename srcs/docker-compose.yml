@@ -27,7 +27,8 @@ services:
         - mariadb
       restart: on-failure
       ports:
-        - "9000:9000" # Map port 9000 on host to port 9000 in container
+        - "9000:9000" # Map port 9000 on host to port 9000 in container - publishing a port
+                      # This allows external clients to access the services running inside the container.
       volumes:
         - wordpress_files:/var/www/inception/
       networks:
@@ -37,7 +38,6 @@ services:
       build:
         context: ./requirements/nginx
         dockerfile: Dockerfile
-      # Specify the image name for NGINX
       image: nginx:latest
       env_file:
         - ./.env
@@ -51,22 +51,21 @@ services:
       networks:
         - Inception
 
-
 volumes:
-
   database:
-    driver: local
-    driver_opts:
+    driver: local # default
+    driver_opts:  # options, if not specifyed it would be a managed volume (managed by Docker and stored independently from host filesystem)
+                  # I use options to be able to do a bind mount of a specific file or directory from the host filesystem into the container 
+                  # and adere to the subjects requirements
       type: none
       o: bind
-      device: ~/data/database
-
+      device: ~/data/rimarque/database
   wordpress_files:
     driver: local
     driver_opts:
-      type: none
-      o: bind
-      device: ~/data/wordpress_files
+      type: none #no specific file system is used, it will be a bind mount 
+      o: bind #option: bind -> mount a dir from host into container
+      device: ~/data/rimarque/wordpress_files
 
 networks:
   Inception:
