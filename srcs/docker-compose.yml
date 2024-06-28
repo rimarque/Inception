@@ -67,9 +67,7 @@ volumes:
       o: bind #option: bind -> mount a dir from host into container
       device: ~/data/rimarque/wordpress_files
 
+# Setting up a bridge netwoork so containers can communicate with each other
 networks:
   Inception:
     driver: bridge
-
-
-#`docker-compose up --build
