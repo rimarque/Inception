@@ -1,0 +1,16 @@
+Docker is a tool that makes it easier to create, deploy, and run applications by using containers. Containers are like lightweight, portable virtual machines that bundle your application with all its dependencies, so it runs the same everywhere.
+
+Docker Compose is a tool for managing multi-container Docker applications.
+
+The Benefit of Docker Compared to VMs:
+
+Lightweight: Containers share the host OS kernel and are much lighter than virtual machines, which include a full OS.
+Faster Startup: Containers start up much faster than VMs.
+Consistency: Containers ensure the application runs the same in every environment.
+Resource Efficiency: Containers use fewer resources because they don't need a full OS.
+
+The directory structure for a Docker project is important for organization and maintainability.
+
+Docker network:
+Allows containers to communicate with each other and with the outside world. 
+Default Bridge Network.

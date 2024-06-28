@@ -1,14 +1,14 @@
 NAME = inception
 COMPOSE = ./srcs/docker-compose.yml
-DATA_PATH ?= ~/data/rimarque
+VOL_PATH ?= ~/data
 
 
 all: vol up 
 
 vol:
-	sudo mkdir -p $(DATA_PATH)
-	sudo mkdir -p $(DATA_PATH)/database
-	sudo mkdir -p $(DATA_PATH)/wordpress_files
+	sudo mkdir -p $(VOL_PATH)
+	sudo mkdir -p $(VOL_PATH)/database
+	sudo mkdir -p $(VOL_PATH)/wordpress_files
 
 up:
 	docker compose -p $(NAME) -f $(COMPOSE) up --build -d

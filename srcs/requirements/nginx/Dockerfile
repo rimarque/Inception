@@ -14,5 +14,5 @@ COPY ./conf/nginx.conf /etc/nginx/sites-available/default
 
 RUN chmod +x /tmp/init.sh
 
-# Set the entrypoint script as the entry point for the container
+# Set the initialization script as the entry point for the container
 ENTRYPOINT ["/tmp/init.sh"]

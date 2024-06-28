@@ -4,7 +4,7 @@ services:
       build:
         context: ./requirements/mariadb
         dockerfile: Dockerfile
-      image: mariadb:latest
+      image: mariadb
       env_file:
         - ./.env
       init: true
@@ -20,7 +20,7 @@ services:
       build:
         context: ./requirements/wordpress
         dockerfile: Dockerfile
-      image: wordpress:latest
+      image: wordpress
       env_file:
         - ./.env
       depends_on:
@@ -38,7 +38,7 @@ services:
       build:
         context: ./requirements/nginx
         dockerfile: Dockerfile
-      image: nginx:latest
+      image: nginx
       env_file:
         - ./.env
       depends_on:
@@ -59,13 +59,13 @@ volumes:
                   # and adere to the subjects requirements
       type: none
       o: bind
-      device: ~/data/rimarque/database
+      device: ~/data/database
   wordpress_files:
     driver: local
     driver_opts:
-      type: none #no specific file system is used, it will be a bind mount 
-      o: bind #option: bind -> mount a dir from host into container
-      device: ~/data/rimarque/wordpress_files
+      type: none
+      o: bind
+      device: ~/data/wordpress_files
 
 # Setting up a bridge netwoork so containers can communicate with each other
 networks:
